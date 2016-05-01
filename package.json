@@ -1,0 +1,28 @@
+{
+  "name": "bson-json-transform",
+  "version": "1.0.0",
+  "description": "A Node.js Transform for streaming Bson into Json",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danielgindi/node-bson-json-transform"
+  },
+  "keywords": [
+    "node.js",
+    "bson",
+    "json",
+    "transform",
+    "stream"
+  ],
+  "author": "Daniel Cohen Gindi <danielgindi@gmail.com> (https://github.com/danielgindi)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danielgindi/node-bson-json-transform/issues"
+  },
+  "homepage": "https://github.com/danielgindi/node-bson-json-transform",
+  "dependencies": {
+  }
+}
