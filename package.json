@@ -1,6 +1,6 @@
 {
   "name": "bson-json-transform",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Node.js Transform for streaming Bson into Json",
   "main": "index.js",
   "scripts": {
