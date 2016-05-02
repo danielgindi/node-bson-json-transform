@@ -457,7 +457,7 @@ var BsonJsonTransform = function (options) {
                             value = buffer[bufferIndex++];
 
                             this.push('{"binary_type":');
-                            this.push(stringForSubtype(value));
+                            this.push(JSON.stringify(stringForSubtype(value)));
                             this.push(',"binary_data":"');
                             state.readingValue = 2; // Waiting for binary data
                         } else if (state.readingValue === 2) {
