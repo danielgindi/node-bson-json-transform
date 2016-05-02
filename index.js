@@ -216,6 +216,14 @@ var stringForSubtype = function (subType) {
  * @constructor
  */
 var BsonJsonTransform = function (options) {
+
+    // Allow instansiation without `new`
+    if (!(this instanceof BsonJsonTransform)) {
+        return new (Function.prototype.bind.apply(
+            BsonJsonTransform, 
+            [BsonJsonTransform].concat(Array.prototype.slice.call(arguments, 0))));
+    }
+    
     options = options || {};
 
     var hasHeader = options.hasHeader === undefined || !!options.hasHeader;
@@ -237,10 +245,6 @@ var BsonJsonTransform = function (options) {
 
     //noinspection JSUndefinedPropertyAssignment
     options.objectMode = true;
-
-    if (!(this instanceof BsonJsonTransform)) {
-        return new BsonJsonTransform(options);
-    }
 
     this._bsonCount = 0;
 
