@@ -9,6 +9,19 @@ With this you can convert a large BSON to a JSON without exchausting your availa
 
 * Parse all BSON features as a stream.
 * Option to skip first BSON "total size" header.
+* Handling of Int64 despite JS' limitation
+
+## About Int64 and JavaScript
+
+Due to the fact that in JavaScript any number is always a IEEE 754 64-bit floating point value, there's a side-effect of whole numbers being limited to 53 bits. When being larger than that - they are kind of rounded and loses precision of the lower bits. That is - the magnitude stays, but you lose the ones, the tens, and then the hunderds and so on - and they become zeros.
+
+We handle parsing Int64 values from BSON by synthesizing the Int64 values and simulating the printing to string.
+There are different ways to handle it:
+1. Always output as numeric values - but then if you read the JSON in a JavaScript environment, they will be rounded when larger than 53 bits.
+2. Always output as string values, and thus not loosing the value, but loosing the type.
+3. Output as numeric when it fits in 53bit boundaries, and as string when larger.
+
+You can use the `preserveInt64` option to choose how you would like to go about it.
 
 ## Installation:
 
@@ -22,7 +35,7 @@ Name | Type | Default | Explanation
 ---- | ---- | ------- | -----------
   `hasHeader` | `Boolean` | `true` | Does the stream begin with a BSON length header?
   `arrayOfBsons` | `Boolean` | `false` | Try to parse sequential BSONs until data runs out
-  `preserveInt64` | `String|Boolean|null` | `true` | Preserve `Int64` when overflowing the JS 53bit limitation.<br />- `false` - Do not try to preserve (large numbers may be truncated!)<br />- `'number'` - Always output as numbers. Be careful when you read those!<br />- `'string'` - Always output as a string.<br />- `'auto'` - Output as a string when over 53bits, and as a number when possible.
+  `preserveInt64` | `String|Boolean` | `'auto'` | Preserve `Int64` when overflowing the JS 53bit limitation.<br />- `false` - Do not try to preserve (large numbers may be truncated!)<br />- `'number'` - Always output as numbers. Be careful when you read those!<br />- `'string'` - Always output as a string.<br />- `'auto'` - Output as a string when over 53bits, and as a number when possible.
 
   
 ## Usage example:
