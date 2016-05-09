@@ -231,15 +231,15 @@ var BsonJsonTransform = function (options) {
     var preserveInt64Opt = typeof options.preserveInt64 === 'string'
         ? options.preserveInt64.toLowerCase()
         : options.preserveInt64;
+        
+    if (preserveInt64Opt === undefined || preserveInt64Opt === true) {
+        preserveInt64Opt = 'auto';
+    }
 
-    var preserveInt64 = preserveInt64Opt === undefined ||
-        preserveInt64Opt === true ||
-        preserveInt64Opt === 'auto' ||
-        preserveInt64Opt === 'number' ||
-        preserveInt64Opt === 'string';
     var preserveInt64Number = preserveInt64Opt === 'number';
     var preserveInt64String = preserveInt64Opt === 'string';
-    var preserveInt64Auto = preserveInt64 && !preserveInt64Number && !preserveInt64String;
+    var preserveInt64Auto = preserveInt64Opt === 'auto';
+    var preserveInt64 = preserveInt64Number || preserveInt64String || preserveInt64Auto;
 
     this._arrayOfBsons = !!options.arrayOfBsons;
 
