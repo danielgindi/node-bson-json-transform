@@ -43,7 +43,7 @@ Name | Type | Default | Explanation
 ```javascript
 
 var fs = require('fs');
-var BsonJsonTransform = require('bson-json-reader');
+var BsonJsonTransform = require('bson-json-transform');
 
 fs
 	.createReadStream('my_data.bson')
